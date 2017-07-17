@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>相册系统</title>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <script src="js/act.js"></script>
+</head>
+<body>
+<%include head.ejs%>
+<div class="container" style="margin-top: 120px">
+
+    <div class="row">
+        <% if(photos.length){ %>
+        <% for(var i = 0;i < photos.length;i++){ %>
+        <div class="col-xs-6 col-md-3 pho">
+
+            <a href="/" class="thumbnail">
+                <img src="<%=photos[i]%>" alt="暂无封面"  style="height: 158px;">
+                <h4 class="text-center"><%= photos[i]%></h4>
+            </a>
+            <div class="fm">
+                <a href="/fengmian<%=photos[i]%>" class="btn btn-primary">设置封面</a>
+            </div>
+        </div>
+        <% } %>
+        <% } %>
+    </div>
+</div>
+</body>
+
+</html>
+<script src="/js/act.js"></script>
+<script src="/js/bootstrap.min.js"></script>

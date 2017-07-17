@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>空间留言板</title>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+</head>
+<body>
+<%include head.ejs%>
+<div class="container">
+    <h1 class="text-center text-success">空间留言板</h1>
+    <div class="text-left jiyu">
+        <h4>主人寄语</h4>
+        <div class="jycontent">
+            如果没有遇上那么多转弯，怎么来到你身旁？
+        </div>
+    </div>
+    <h4>发表你的留言</h4>
+    <form action="/addmessage" method="get">
+        <div class="input-group">
+            <span class="input-group-addon" id="addon2">留言</span>
+            <textarea type="text" class="form-control" placeholder="留言内容" name="lcontent"></textarea>
+        </div>
+        <input type="submit" class="btn btn-success leave" value="留言">
+    </form>
+    <div class="lyarea">
+        <h3 class="text-left text-success">留言列表(<%=counts%>)</h3>
+        <hr/>
+        <%for(var i=0;i<leavedata.length;i++){%>
+        <%for(var j=0;j<personal.length;j++){%>
+        <%if(leavedata[i].uname==personal[j].uname){%>
+        <div class="da">
+         <div class="leave">
+            <div class="lleft">
+                <img src="<%=personal[j].tx%>" class="img-circle"/>
+            </div>
+            <div class="lright">
+                <span style="font-size: 16px;font-weight: bold;"><%=leavedata[i].name%></span><br/>
+                <span><%=leavedata[i].leavetime%></span>
+            </div>
+        </div>
+        <%}%>
+        <%}%>
+
+          <div class="leavecontent"><%=leavedata[i].lcontent%></div>
+
+          <a href="/delete<%=leavedata[i]._id%>" class="btn btn-default text-right btned" >删除</a>
+          <hr class="text-success" />
+        </div>
+        <%}%>
+    </div>
+    <nav aria-label="Page navigation" class="page">
+        <ul class="pagination">
+            <li>
+                <a href="/page<%=prepage%>" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <%for(var j=0;j<pagecounts;j++){%>
+            <li><a href="/page<%=j%>"><%=j+1%></a></li>
+            <%}%>
+            <li>
+                <a href="/page<%=nextpage%>" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+</body>
+
+</html>
+
